@@ -1,0 +1,37 @@
+<button class="btn btn-success mb-4" data-target="#addBrandModal" data-toggle="modal"><span th:text="'++' + #{label.roles}"></span></button>
+
+<div aria-hidden="true" class="modal fade" id="addBrandModal" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-lg" role="document">
+        <form method="post" th:action="@{'/add_role'}">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"> <span th:text="#{label.role}"></span></h5>
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="role_name"><span th:text="#{admin.label_title}"></span></label>
+                        <input class="form-control" id="role_name" name="role_name" type="text">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="role_desc"><span th:text="#{admin.label_item_desc}"></span></label>
+                        <input class="form-control" id="role_desc" name="role_desc" type="text">
+                    </div>
+
+
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" data-dismiss="modal" type="button">
+                            <span th:text="#{admin.button_cancel}"></span>
+                        </button>
+                        <button class="btn btn-dark" type="submit">
+                            <i class="fas fa-file-upload"></i> <span th:text="#{admin.button_submit}"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

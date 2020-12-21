@@ -1,0 +1,35 @@
+<button class="btn btn-success mb-4" data-target="#addCategoryModal" data-toggle="modal"><span th:text="'++' + #{label.category}"></span></button>
+
+<div aria-hidden="true" class="modal fade" id="addCategoryModal" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"> <span th:text="#{label.category}"></span></h5>
+            </div>
+
+            <div class="modal-body">
+                <form id="add_category_form" method="post" th:action="@{'/add_category'}">
+                    <div class="form-group">
+                        <label for="categoryName"><span th:text="#{label.category_name}"></span></label>
+                        <input class="form-control" id="categoryName" name="categoryName" type="text">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="categoryLogoURL"><span th:text="#{admin.label_category_logo_url}"></span></label>
+                        <input class="form-control" id="categoryLogoURL" name="categoryLogoURL" type="text">
+                    </div>
+
+                </form>
+
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-dismiss="modal" type="button">
+                        <span th:text="#{admin.button_cancel}"></span>
+                    </button>
+                    <button class="btn btn-dark" type="submit" form="add_category_form">
+                        <i class="fas fa-file-upload"></i> <span th:text="#{admin.button_submit}"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

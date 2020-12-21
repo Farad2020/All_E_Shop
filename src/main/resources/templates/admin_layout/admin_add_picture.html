@@ -1,0 +1,29 @@
+<button class="btn btn-success mb-4" data-target="#addPictureModal" data-toggle="modal"><span th:text="'++' + #{label.picture}"></span></button>
+
+<div aria-hidden="true" class="modal fade" id="addPictureModal" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"> <span th:text="#{label.picture}"></span></h5>
+            </div>
+
+            <div class="modal-body">
+                <form id="add_category_form" method="post" th:action="@{'/add_picture'}">
+                    <div class="form-group">
+                        <label for="pictureURL"><span th:text="#{label.picture}"></span></label>
+                        <input class="form-control" id="pictureURL" name="pictureURL" type="text">
+                    </div>
+                </form>
+
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-dismiss="modal" type="button">
+                        <span th:text="#{admin.button_cancel}"></span>
+                    </button>
+                    <button class="btn btn-dark" type="submit" form="add_category_form">
+                        <i class="fas fa-file-upload"></i> <span th:text="#{admin.button_submit}"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

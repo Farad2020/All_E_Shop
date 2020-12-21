@@ -1,0 +1,28 @@
+body{
+    background-color: #F2F2F2;
+    color: #0A0A0A!important;
+}
+
+.bg-dark{
+    background-color: #0A0A0A!important;
+}
+
+.btn-dark{
+    background-color: #0A0A0A!important;
+    border-color: #0A0A0A!important;
+}
+.btn-outline-dark{
+    border-color: #0A0A0A!important;
+}
+.btn-outline-dark:hover {
+    background-color: #0A0A0A !important;
+}
+
+.hover-image{
+    max-width: 20rem;
+    max-height: 20rem;
+}
+
+.popover-body{
+    padding: 0;
+}

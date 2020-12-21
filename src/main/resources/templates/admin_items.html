@@ -1,0 +1,50 @@
+<html layout:decorator="admin_layout/admin_panel" xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<div layout:fragment="admin_page_content">
+    <div class="container" style="min-height: 700px;">
+
+        <h3 th:text="#{label.category_all}"></h3>
+        <div th:insert="~{admin_layout/admin_add_item}">
+
+        </div>
+
+        <section>
+            <div class="row">
+                <div class="col-12">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col" style="width:10%;">ID</th>
+                            <th scope="col"><span th:text="#{admin.label_item_name}"></span></th>
+                            <th scope="col"><span th:text="#{admin.label_item_rating}"></span></th>
+                            <th scope="col"><span th:text="#{admin.label_item_price}"></span></th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr th:each="item : ${items}">
+                            <th scope="row" th:text="${item.getId()}"></th>
+                            <th scope="row" th:text="${item.getName()}"></th>
+                            <th scope="row" th:text="${item.getRating()}"></th>
+                            <th scope="row" th:text="${item.getPrice()}"></th>
+                            <th scope="row"> <a class="btn btn-sm btn-danger"
+                                               th:href="@{'/delete_item/' + ${item.getId()}}">
+                                <i class="far fa-trash-alt"></i> <span th:text="#{admin.label_delete}"></span> </a></th>
+                            <th scope="row">
+                                <a class="btn btn-success btn-sm"
+                                   th:href="@{'/update_item/' + ${item.getId()}}">
+                                    <i class="fas fa-pencil-alt"></i> <span th:text="#{admin.label_update}"></span></a>
+                            </th>
+                        </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+</html>

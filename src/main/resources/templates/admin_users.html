@@ -1,0 +1,53 @@
+<html layout:decorator="admin_layout/admin_panel" xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<div layout:fragment="admin_page_content">
+    <!-- BRANDS -->
+    <div class="container" style="min-height: 700px;">
+        <h3 th:text="#{label.users}">  </h3>
+        <div th:insert="~{admin_layout/admin_add_user}">
+
+        </div>
+
+        <section>
+            <div class="row">
+                <div class="col-12">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col" style="width:10%;"><span th:text="#{label.email}"></span></th>
+                            <th scope="col"><span th:text="#{label.full_name}"></span></th>
+                            <th scope="col"><span th:text="#{label.roles}"></span></th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr th:each="user : ${users}">
+                            <th scope="row" th:text="${user.getEmail()}"></th>
+                            <th scope="row" th:text="${user.getFullName()}"></th>
+                            <th scope="row" ><span th:each="role : ${user.getRoles()}" th:text="${role.getName() + ' '}"></span></th>
+
+                            <th scope="row" > <a class="btn btn-sm btn-danger" th:href="@{'/delete_user/' + ${user.getId()}}" >
+                                <i class="far fa-trash-alt"></i> <span th:text="#{admin.label_delete}"></span>
+                            </a> </th>
+
+                            <th scope="row" > <a class="btn btn-success btn-sm" th:href="@{'/edit_user/' + ${user.getId()}}" >
+                                <i class="fas fa-pencil-alt"></i> <span th:text="#{admin.edit_label}"></span>
+                            </a> </th>
+
+
+
+
+                        </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </section>
+    </div>
+
+</div>
+</html>

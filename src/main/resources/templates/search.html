@@ -1,0 +1,62 @@
+<html layout:decorator="layout/main.html" xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+
+
+<div layout:fragment="site_content">
+    <div class="d-flex align-items-center justify-content-center">
+        <form class="form-inline mb-2 " method="get" th:action="@{'/advanced_search'}">
+            <input class="form-control mb-2" name="itemName" th:placeholder="#{admin.label_name}" style="width: 12rem" type="search">
+
+            <input class="form-control ml-2 mb-2" name="brandName" th:placeholder="#{label.brand}" style="width: 12rem" type="search">
+
+            <input class="form-control mb-2 ml-2" name="itemPriceFrom" th:placeholder="#{label.price_from}"
+                   step="0.01" min="1" max="1000000000" style="width: 10rem" type="search">
+
+            <input class="form-control mb-2 ml-2" name="itemPriceTo" th:placeholder="#{label.price_to}"
+                   step="0.01" min="1" max="1000000000" style="width: 10rem" type="search">
+            <button class="btn btn-outline-dark mb-2 mx-2 ml-auto" type="submit" th:text="#{label.search}"></button>
+
+            <label class="mr-auto"><span th:text="#{label.search_results}"></span>:</label>
+            <div class="form-group ">
+
+                <label for="orderBy"><span th:text="#{label.order_by}"></span>: </label>
+
+                <select class="form-control ml-3" id="orderBy" name="orderAsc">
+                    <option th:value="true" selected th:text="#{label.ascending}"> </option>
+                    <option th:value="false" th:text="#{label.descending}">  </option>
+                </select>
+            </div>
+        </form>
+    </div>
+
+    <div class="row">
+
+
+        <div class="col-4" style=" margin-top: 20px" th:if="${items != null && items.size() > 0}" th:each="item : ${items}">
+            <div class="card" style="height: 23rem;">
+                <div class="d-flex justify-content-center" style=" min-height: 10rem">
+                    <img alt="..." class=" align-self-center" style="max-height: 10rem; max-width: 10rem;"
+                         th:src="@{${item.getSmallPicURL()}}"></div>
+                <div class="card-body" style="overflow: hidden">
+                    <h5 class="card-title" style="margin: 0; padding: 0; color: royalblue" ><a th:href="@{'/item/' + ${item.getId()}}" th:text="${item.name}"></a> </h5>
+                    <h6 class="card-title" style="margin: 0; padding: 0; color: black" th:text="${'$' + item.price}"></h6>
+                    <p><span class="font-weight-bold" th:text="#{label.brand}"> </span>:  <a
+                            th:href="${'advanced_search?itemName=&itemPriceFrom=&itemPriceTo=&orderAsc=true&brandName=' + item.brand.name}"
+                            th:text="${item.brand != null ? item.brand.name + ' / ' + item.brand.country.name : '......'}"  ></a> </p>
+                    <p class="card-text" th:text="${item.description}"></p>
+                    <!--<a class="stretched-link" th:href="@{'/item/' + ${item.getId()}}"></a>-->
+
+                </div>
+                <div class="card-footer">
+                    <i class="fas fa-star" style="color: gold"
+                       th:each="i : ${#numbers.sequence(1, item.getRating())}" th:if="${item.getRating() > 0}"></i>
+                    <i class="far fa-star" style="color: gold"
+                       th:each="i : ${#numbers.sequence(1, item.getEmptyStars())}"
+                       th:if="${item.getEmptyStars() > 0}"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</html>

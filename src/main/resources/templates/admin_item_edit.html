@@ -1,0 +1,128 @@
+<html layout:decorator="admin_layout/admin_panel" xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<div layout:fragment="admin_page_content">
+    <div class="container" style="min-height: 700px;">
+        <h5 class="modal-title"><span th:text="#{admin.edit_label}"></span></h5>
+
+        <form method="post" th:action="@{'/editItem'}" id="edit_item_form">
+            <input hidden name="itemId" th:value="${item.getId()}">
+
+            <div class="form-group">
+                <label for="itemName"><span
+                        th:text="#{admin.label_item_name}"></span></label>
+                <input class="form-control" id="itemName" name="itemName"
+                       th:value="${item.getName()}" type="text">
+            </div>
+
+            <div class="form-group">
+                <label for="itemDesc"><span
+                        th:text="#{admin.label_item_desc}"></span></label>
+                <textarea class="form-control" id="itemDesc" name="itemDesc"
+                          rows="6" th:text="${item.getDescription()}"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="itemPrice"><span
+                        th:text="#{admin.label_item_price}"></span></label>
+                <input class="form-control" id="itemPrice" max="1000000000"
+                       min="1" name="itemPrice" step="0.01"
+                       th:value="${item.getPrice()}" type="number">
+            </div>
+
+            <div class="form-group">
+                <label for="itemRating"><span
+                        th:text="#{admin.label_item_rating}"></span></label>
+                <input class="form-control" id="itemRating" max="5"
+                       min="1" name="itemRating" th:value="${item.getRating()}"
+                       type="number">
+            </div>
+
+            <div class="form-group">
+                <label for="itemSmallPicUrl"><span
+                        th:text="#{admin.label_item_small_pic_url}"></span></label>
+                <input class="form-control" id="itemSmallPicUrl"
+                       name="itemSmallPicUrl" th:value="${item.getSmallPicURL()}"
+                       type="text">
+            </div>
+
+            <div class="form-group">
+                <label for="itemLargePicUrl"><span
+                        th:text="#{admin.label_item_large_pic_url}"></span></label>
+                <input class="form-control" id="itemLargePicUrl"
+                       name="itemLargePicUrl" th:value="${item.getLargePicURL()}"
+                       type="text">
+            </div>
+
+            <div class="form-group">
+                <label for="itemInTopPage"><span
+                        th:text="#{admin.label_item_in_top}"></span></label>
+                <select class="form-control" id="itemInTopPage"
+                        name="itemInTopPage">
+                    <option th:selected="${item.isInTopPage() ? true : false}"
+                            th:text="#{admin.label_item_in_top_true}"
+                            th:value="true"></option>
+                    <option th:selected="${!item.isInTopPage() ? true : false}"
+                            th:text="#{admin.label_item_in_top_false}"
+                            th:value="false"></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="brandSelect"><span
+                        th:text="#{label.brand}"></span></label>
+                <select class="form-control" id="brandSelect" name="brand_id">
+                    <option th:each="brand : ${brands}"
+                            th:selected="${item.brand != null ? item.brand.id.equals(brand.id) : false}"
+                            th:text="${brand.name + ' / ' + brand.country.name}"
+                            th:value="${brand.id}"></option>
+                </select>
+            </div>
+        </form>
+
+        <button class="btn btn-dark" type="submit" form="edit_item_form">
+            <i class="fas fa-file-upload"></i> <span th:text="#{admin.button_submit}"></span>
+        </button>
+
+        <h5 th:text="#{label.category}"></h5>
+        <table class="table table-striped">
+            <tbody>
+            <tr th:each="cat : ${categories}">
+                <form method="post" th:action="@{'/assign_category'}">
+                    <input name="item_id" th:value="${item.id}" type="hidden">
+                    <input name="category_id" th:value="${cat.id}" type="hidden">
+                    <td th:text="${cat.name}"></td>
+                    <td style="width: 15%">
+                        <button th:if="${!item.containsCategory(cat)}" class="btn btn-success btn-sm" style="width: 2rem; height: 2rem">+</button>
+                        <button th:if="${item.containsCategory(cat)}" class="btn btn-danger btn-sm" style="width: 2rem; height: 2rem">-</button>
+                    </td>
+
+                </form>
+            </tr>
+            </tbody>
+        </table>
+
+        <h5 th:text="#{label.picture}"></h5>
+        <table class="table table-striped">
+            <tbody>
+            <tr th:each="pic : ${pictures}">
+                <form method="post" th:action="@{'/assign_picture'}">
+                    <input name="item_id" th:value="${item.id}" type="hidden">
+                    <input name="picture_id" th:value="${pic.id}" type="hidden">
+                    <td scope="row"><img th:src="${pic.getUrl()}" style="max-width: 4rem; max-height: 4rem;"></td>
+
+                    <td th:text="${pic.getUrl()}"></td>
+                    <td style="width: 15%">
+                        <button th:if="${!pic.containsShopItem(item)}" class="btn btn-success btn-sm" style="width: 2rem; height: 2rem">+</button>
+                        <button th:if="${pic.containsShopItem(item)}" class="btn btn-danger btn-sm" style="width: 2rem; height: 2rem">-</button>
+                    </td>
+
+                </form>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+
+</div>
+</html>

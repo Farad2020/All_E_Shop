@@ -1,0 +1,42 @@
+<div class="list-group bg-dark font-weight-bold">
+    <a href="#" class="list-group-item list-group-item-action list-group-item-dark active" th:text="#{label.categories}">
+    </a>
+    <a href="#" class="list-group-item list-group-item-action"><span th:text="#{label.category_all}"></span> <i class='fas fa-shopping-cart'></i></a>
+
+    <a th:each="cat : ${categories}"
+       href="#" class="list-group-item list-group-item-action">
+        <span name="cat_name" th:text="${cat.name}"></span>  <span th:class="${cat.logoURL}"></span></a>
+    <!--
+
+    <a href="#" class="list-group-item list-group-item-action"><span th:text="#{label.category_laptops}"></span> <i class="fas fa-laptop"></i></a>
+    <a href="#" class="list-group-item list-group-item-action"><span th:text="#{label.category_watches}"></span> <i class="fas fa-clock"></i></a>
+    <a href="#" class="list-group-item list-group-item-action"><span th:text="#{label.category_consoles}"></span> <i class="fab fa-playstation"></i></a>
+    <a href="#" class="list-group-item list-group-item-action"><span th:text="#{label.category_other}"></span> <i class="fas fa-luggage-cart"></i></a>
+     -->
+</div>
+
+<div class="list-group bg-dark mt-4 font-weight-bold">
+    <a href="#" class="list-group-item list-group-item-action list-group-item-dark active" th:text="#{label.brands}">
+    </a>
+
+    <a th:each="brand : ${brands}"
+       th:href="${'/advanced_search?itemName=&itemPriceFrom=&itemPriceTo=&orderAsc=true&brandName=' + brand.name}"
+       th:text="${brand.name}" class="list-group-item list-group-item-action"></a>
+
+</div>
+
+<div class="list-group bg-dark mt-4 font-weight-bold">
+    <a href="#" class="list-group-item list-group-item-action list-group-item-dark active" th:text="#{label.payment}">
+    </a>
+    <a href="#" class="list-group-item list-group-item-action" style="font-size: 4rem;">
+        <div class="container">
+            <i class="fab fa-cc-apple-pay"></i>
+            <i class="fab fa-cc-visa"></i>
+            <i class="fab fa-cc-paypal"></i>
+            <br>
+            <i class="fab fa-cc-amazon-pay"></i>
+            <i class="fab fa-cc-mastercard"></i>
+            <i class="fab fa-cc-amex"></i>
+        </div>
+    </a>
+</div>

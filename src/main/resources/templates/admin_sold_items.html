@@ -1,0 +1,36 @@
+<html layout:decorator="admin_layout/admin_panel" xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<div layout:fragment="admin_page_content">
+    <!-- BRANDS -->
+    <div class="container" style="min-height: 700px;">
+        <h3 > Sold Items </h3>
+
+        <section>
+            <div class="row">
+                <div class="col-12">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col" style="width:40%;">Item Name</th>
+                            <th scope="col">Buy Date</th>
+                            <th scope="col">Amount</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr th:each="record : ${itemRecords}">
+                            <th scope="row" th:text="${record.getShopItem().getName()}"></th>
+                            <th scope="row" th:text="${record.getSoldDate()}"></th>
+                            <th scope="row" th:text="${record.getAmount()}"></th>
+                        </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </section>
+    </div>
+
+</div>
+</html>

@@ -1,0 +1,79 @@
+<html layout:decorator="admin_layout/admin_panel" xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<div layout:fragment="admin_page_content">
+    <div class="container" style="min-height: 700px;">
+        <h3 th:text="#{label.category}">  </h3>
+        <div th:insert="~{admin_layout/admin_add_picture}">
+
+        </div>
+
+        <section>
+            <div class="row">
+                <div class="col-12">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col"  style="width:10%;"><span th:text="#{label.picture}"></span></th>
+                            <th scope="col">URL</th>
+                            <th scope="col">Date</th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr th:each="pic : ${pictures}">
+                            <th scope="row"><img th:src="${pic.getUrl()}" style="max-width: 4rem; max-height: 4rem;"></th>
+                            <th scope="row" th:text="${pic.getUrl()}"></th>
+                            <th scope="row" > <a class="btn btn-sm btn-danger" th:href="@{'/delete_picture/' + ${pic.getId()}}">
+                                <i class="far fa-trash-alt"></i> <span th:text="#{admin.label_delete}"></span>
+                            </a> </th>
+
+                            <th scope="row" ><button class="btn btn-success btn-sm" th:data-target="${'#PictureEditModal' + pic.getId()}" data-toggle="modal">
+                                <i class="fas fa-pencil-alt"></i> <span th:text="#{admin.label_update}"></span>
+                            </button></th>
+
+                            <div aria-hidden="true" class="modal fade" th:id="${'PictureEditModal' + pic.getId()}" role="dialog" tabindex="-1">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <form method="post" th:action="@{'/edit_picture'}">
+                                        <input hidden name="pictureId" th:value="${pic.getId()}">
+
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title"> <span th:text="#{admin.edit_label}"></span></h5>
+                                            </div>
+
+                                            <div class="modal-body">
+
+                                                <div class="form-group">
+                                                    <label for="pictureURL"><span th:text="#{label.picture}"></span></label>
+                                                    <input class="form-control" id="pictureURL" name="pictureURL" type="text" th:value="${pic.getUrl()}">
+                                                </div>
+
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-secondary" data-dismiss="modal" type="button">
+                                                        <span th:text="#{admin.button_cancel}"></span>
+                                                    </button>
+                                                    <button class="btn btn-dark" type="submit">
+                                                        <i class="fas fa-file-upload"></i> <span th:text="#{admin.button_submit}"></span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+
+                        </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+</div>
+</html>

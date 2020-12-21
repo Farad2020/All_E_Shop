@@ -1,0 +1,32 @@
+<div class="list-group bg-dark font-weight-bold"
+     xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+     xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <a href="#" class="list-group-item list-group-item-action list-group-item-dark active">
+        Dashboard
+    </a>
+    <a th:href="${'/admin'}" class="list-group-item list-group-item-action"
+       th:text="#{label.items}"> Items </a>
+
+    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="${'/admin_countries'}" class="list-group-item list-group-item-action"
+       th:text="#{label.countries}"> </a>
+
+    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="${'/admin_brands'}" class="list-group-item list-group-item-action"
+       th:text="#{label.brands}"> Brands </a>
+
+    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="${'/admin_categories'}" class="list-group-item list-group-item-action"
+       th:text="#{label.categories}"> Categories </a>
+
+    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="${'/admin_users'}" class="list-group-item list-group-item-action"
+       th:text="#{label.users}"> Users </a>
+
+    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="${'/admin_roles'}" class="list-group-item list-group-item-action"
+       th:text="#{label.roles}"> Roles </a>
+
+    <a sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')" th:href="${'/admin_pictures'}" class="list-group-item list-group-item-action"
+       th:text="#{label.picture}"> Pictures </a>
+
+    <a sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')" th:href="${'/admin_sold_item_records'}" class="list-group-item list-group-item-action"
+       > Sold Item Records </a>
+</div>

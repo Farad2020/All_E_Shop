@@ -1,0 +1,137 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/main.html" >
+
+
+<div layout:fragment="site_content">
+    <div class="d-flex align-items-center justify-content-center">
+        <form class="form-inline mb-2 " method="get" th:action="@{'/search'}">
+            <input class="form-control mb-2" name="itemName" th:placeholder="#{label.search}" style="width: 45rem" type="search">
+            <button class="btn btn-outline-dark mb-2 mx-2" type="submit" th:text="#{label.search}"></button>
+        </form>
+    </div>
+
+    <div class="row">
+        <div class="card" style="width: 100%">
+            <div class="card-header">
+                <span th:text="#{label.basket}"></span>
+            </div>
+            <div class="card-body">
+                <h3><span th:text="#{label.basket_items}"></span></h3>
+
+                <table th:if="${items_set != null && items_set.size() > 0}" class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col"  style="width:40%;"><span th:text="#{label.items}"></span></th>
+                        <th scope="col"><span th:text="#{admin.label_item_price}"></span></th>
+                        <th scope="col"><span th:text="#{label.amount}"></span></th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr th:each="item : ${items_set}">
+                        <th scope="row" th:text="${item.getName()}"></th>
+                        <td scope="row" th:text="${item.getPrice()}"></td>
+                        <td scope="row" th:text="${session_basket.get(item.getId())}"></td>
+
+                        <form method="post" th:action="@{'/add_to_basket'}">
+                            <input hidden name="item_id" th:value="${item.id}">
+
+                            <td style="width: 15%">
+                                <button th:name="submit" th:value="add" class="btn btn-success btn-sm" style="width: 2rem; height: 2rem">+</button>
+                                <button th:name="submit" th:value="remove" class="btn btn-danger btn-sm" style="width: 2rem; height: 2rem">-</button>
+                            </td>
+                        </form>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div th:if="${items_set != null && items_set.size() > 0}">
+                    <h4 > <span th:text="#{label.total}"></span>: <span th:text="${session.session_basket_total}"></span> </h4>
+
+                    <div class="d-flex float-right">
+                        <button class="btn btn-sm btn-dark mb-4 mr-2" data-target="#CheckInModal" data-toggle="modal">
+                            <i class="fas fa-receipt"></i> <span th:text="#{label.check_in}"></span></button>
+
+                        <form method="post" th:action="@{'/clear_basket'}">
+                            <button class="btn btn-sm btn-danger">
+                                <i class="far fa-trash-alt"></i> <span th:text="#{label.clear_basket}"></span>
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+
+                <!-- Basket Modal-->
+                <div aria-hidden="true" class="modal fade" id="CheckInModal" role="dialog" tabindex="-1">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <form method="post" th:action="@{'/check_in'}">
+
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <div style="font-size: 2rem">
+                                        <i class="fab fa-cc-apple-pay"></i>
+                                        <i class="fab fa-cc-visa"></i>
+                                        <i class="fab fa-cc-paypal"></i>
+                                        <i class="fab fa-cc-amazon-pay"></i>
+                                        <i class="fab fa-cc-mastercard"></i>
+                                        <i class="fab fa-cc-amex"></i>
+
+                                    </div>
+                                </div>
+
+                                <div class="modal-body">
+
+                                    <div class="form-group">
+                                        <label for="name">Name</label><span style="color: red; font-weight: bold;">*</span>
+                                        <input class="form-control" id="name" name="name" type="text" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                            <label for="card_number">Card Number</label><span style="color: red; font-weight: bold;">*</span>
+                                            <input class="form-control" id="card_number" name="card_number" type="text" pattern="[0-9]*" required>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col form-group">
+                                            <label for="expiration_date">Expiration (mm/yy)</label><span style="color: red; font-weight: bold;">*</span>
+                                            <input class="form-control" id="expiration_date" name="expiration_date" type="text" inputmode="numeric" required>
+                                        </div>
+
+                                        <div class="col form-group">
+                                            <label for="security_code">Security Code</label><span style="color: red; font-weight: bold;">*</span>
+                                            <input class="form-control" id="security_code" name="security_code" type="text" pattern="[0-9]*" inputmode="numeric" required>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="modal-footer">
+                                        <button class="btn btn-secondary" data-dismiss="modal" type="button">
+                                            <span th:text="#{admin.button_cancel}"></span>
+                                        </button>
+                                        <button class="btn btn-dark" type="submit">
+                                            <i class="fas fa-file-upload"></i> <span th:text="#{label.check_in}"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+                <!--
+                <form th:action="@{'/create_basket'}" method="post">
+                    <label>Name : </label>
+                    <input type="text" class="form-control" name="session_name">
+                    <button class="btn btn-submit" th:text="#{admin.button_submit}"></button>
+                </form>
+                -->
+            </div>
+            <div class="card-footer">
+            </div>
+        </div>
+    </div>
+
+</div>
+</html>

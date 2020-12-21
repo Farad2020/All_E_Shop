@@ -1,0 +1,102 @@
+
+<button class="btn btn-success mb-4" data-target="#addItemModal" data-toggle="modal"><span
+        th:text="#{admin.button_label}"></span></button>
+
+<div aria-hidden="true" class="modal fade" id="addItemModal" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-lg" role="document">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><span th:text="#{admin.message_label}"></span></h5>
+            </div>
+
+            <div class="modal-body">
+
+                <form id="add_item_form" method="post" th:action="@{'/addItem'}">
+                    <div class="form-group">
+                        <label for="itemName"><span th:text="#{admin.label_item_name}"></span></label>
+                        <input class="form-control" id="itemName" name="itemName" type="text">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="itemDesc"><span th:text="#{admin.label_item_desc}"></span></label>
+                        <textarea class="form-control" id="itemDesc" name="itemDesc"
+                                  rows="6"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="itemPrice"><span th:text="#{admin.label_item_price}"></span></label>
+                        <input class="form-control" id="itemPrice" max="1000000000" min="1" name="itemPrice"
+                               step="0.01" type="number">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="itemRating"><span th:text="#{admin.label_item_rating}"></span></label>
+                        <input class="form-control" id="itemRating" max="5" min="1" name="itemRating"
+                               type="number">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="itemSmallPicUrl"><span
+                                th:text="#{admin.label_item_small_pic_url}"></span></label>
+                        <input class="form-control" id="itemSmallPicUrl" name="itemSmallPicUrl" type="text">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="itemLargePicUrl"><span
+                                th:text="#{admin.label_item_large_pic_url}"></span></label>
+                        <input class="form-control" id="itemLargePicUrl" name="itemLargePicUrl" type="text">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="itemInTopPage"><span th:text="#{admin.label_item_in_top}"></span></label>
+                        <select class="form-control" id="itemInTopPage" name="itemInTopPage">
+                            <option th:text="#{admin.label_item_in_top_true}" th:value="true"></option>
+                            <option th:text="#{admin.label_item_in_top_false}" th:value="false"></option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="brandSelect"><span th:text="#{label.brands}"></span></label>
+                        <select class="form-control" id="brandSelect" name="brand_id">
+                            <option th:each="brand : ${brands}"
+                                    th:text="${brand.name + ' / ' + brand.country.name}"
+                                    th:value="${brand.id}"></option>
+                        </select>
+                    </div>
+
+                </form>
+
+                <!--
+                <h5 th:text="#{label.category}"></h5>
+                <table class="table table-striped">
+                    <tbody>
+                    <tr th:each="cat : ${categories}">
+                        <form method="post" th:action="@{'/assign_category'}">
+                            <input name="category_id" th:value="${cat.id}" type="hidden">
+                            <td th:text="${cat.name}"></td>
+                            <td style="width: 15%">
+                                <button class="btn btn-success btn-sm">+</button>
+                            </td>
+
+                        </form>
+                    </tr>
+                    </tbody>
+                </table>
+                -->
+
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-dismiss="modal" type="button">
+                        <span th:text="#{admin.button_cancel}"></span>
+                    </button>
+                    <button class="btn btn-dark" form="add_item_form" type="submit">
+                        <i class="fas fa-file-upload"></i> <span th:text="#{admin.button_submit}"></span>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
