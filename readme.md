@@ -54,3 +54,9 @@ To load most of the views, loading templates to **_Layout.cshtml** is used is us
 
 [My Github](https://docs.github.com/Farad2020)
 
+# All-E Shop Screenshots
+
+![Snapshot_1](https://github.com/Farad2020/All_E_Shop/blob/main/bonus%20pics/Snapshot_1_main.PNG)
+![Snapshot_2](https://github.com/Farad2020/All_E_Shop/blob/main/bonus%20pics/Snapshot_2_main.PNG)
+![Snapshot_3](https://github.com/Farad2020/All_E_Shop/blob/main/bonus%20pics/Snapshot_3_profile.PNG)
+![Snapshot_4](https://github.com/Farad2020/All_E_Shop/blob/main/bonus%20pics/Snapshot_4_admin.PNG)
