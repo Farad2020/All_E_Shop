@@ -31,17 +31,21 @@ To start the application, you should have any idea that can boot Spring Boot Pro
 
 # About Structure, Simplified
 Since this was my first "Big" project on Spring Boot, the structure is a bit flawed in a way, that I have only one controller(HomeController) that manages everything.
+
 In other parts, the workflow of project should be acceptable. Due to having many entities, Services that try to get access to that entities through Repositories, that give access to that entities.
+
 Also security configuration and web configurations are present.
+
 All the mentioned element lie inside src->main->java->com->springTask->All_E_Shop.
+
 Media Files, CSS and JS files located in src->main->resources->static.
+
 Html templates located in src->main->resources.
+
 Language translations located in src->main->resources under bundle messages.
 
 To load most of the views, loading templates to **_Layout.cshtml** is used is used. 
 > And thats basically it!
-
-##### ~~Screenshots From Project~~ [_Low probability to being added_]
 
 # Some Sources
 [Zhuanyshev.kz -> Where I got all the necessary info and tasks](https://zhuanyshev.kz/home)
@@ -49,3 +53,4 @@ To load most of the views, loading templates to **_Layout.cshtml** is used is us
 ["How to write a good readme"](https://medium.com/@meakaakka/a-beginners-guide-to-writing-a-kickass-readme-7ac01da88ab3)
 
 [My Github](https://docs.github.com/Farad2020)
+
